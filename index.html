@@ -30,8 +30,8 @@ body{font-family:Arial,sans-serif;background:#f0f0f0}
 .remrow label{font-size:13px;color:#555;cursor:pointer}
 .btnlogin{width:100%;padding:12px;background:#1a3a6c;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:bold;font-size:15px;margin-top:8px;transition:.2s}
 .btnlogin:hover{background:#2a5aac}
-.btnwa{width:100%;padding:10px;background:#25D366;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:bold;font-size:14px;margin-top:10px}
-.btnwa:hover{background:#1aaa52}
+.btnwa2{width:100%;padding:10px;background:#25D366;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:bold;font-size:14px;margin-top:10px}
+.btnwa2:hover{background:#1aaa52}
 .lcontact{margin-top:18px;font-size:12px;color:#777;line-height:1.8}
 #errmsg{color:#e74c3c;margin-top:8px;font-size:13px;min-height:18px}
 
@@ -78,19 +78,19 @@ table.mt tfoot .vtot{text-align:center;font-size:15px}
 .mlettres{font-size:13px;color:#111;margin-top:20px;line-height:1.7}
 .mlval{font-weight:700}
 
-/* SIGNATURES */
-.sigarea{margin-top:28px;display:flex;gap:40px;align-items:flex-start;flex-shrink:0}
-.sigbox{flex:1}
+/* SIGNATURE — image tampon uniquement */
+.sigarea{margin-top:28px;flex-shrink:0}
 .sigtitre{font-size:12px;font-weight:900;text-decoration:underline;text-transform:uppercase;outline:none;margin-bottom:4px;display:block}
 .signom{font-size:14px;font-weight:900;outline:none;display:block;margin-top:3px}
-.cwrap{position:relative;display:block;width:100%;margin-top:8px}
-canvas{border:1px dashed #bbb;background:#fff;width:100%;height:100px;display:block;touch-action:none;border-radius:3px}
-#stamp{position:absolute;bottom:6px;left:50%;transform:translateX(-50%) rotate(-10deg);width:100px;height:auto;opacity:.75;mix-blend-mode:multiply;pointer-events:none}
-.sctrl{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:7px}
-.sctrl input[type=file]{font-size:11px}
-.clrbtn{padding:4px 12px;background:#555;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:11px}
-.clrbtn:hover{background:#333}
-.sigclient{border:1px solid #ccc;border-radius:4px;height:100px;margin-top:8px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;color:#bbb;font-size:12px}
+.stamp-img{
+  margin-top:10px;
+  max-width:200px;max-height:130px;
+  object-fit:contain;
+  opacity:.9;
+  mix-blend-mode:multiply;
+  display:block;
+}
+.stamp-ctrl{margin-top:6px;font-size:11px;color:#666}
 
 /* PIED */
 .psep{border:none;border-top:1.5px solid #111;margin-top:auto;margin-bottom:8px;flex-shrink:0}
@@ -120,8 +120,6 @@ canvas{border:1px dashed #bbb;background:#fff;width:100%;height:100px;display:bl
   .swrap{overflow:visible}
   #devis{box-shadow:none;border-radius:0;padding:8mm 12mm 0;width:100%;transform:none!important;min-height:auto}
   .actions{display:none}
-  canvas{border:none!important}
-  #stamp{opacity:.75}
   @page{margin:0;size:A4}
 }
 </style>
@@ -158,7 +156,7 @@ canvas{border:1px dashed #bbb;background:#fff;width:100%;height:100px;display:bl
     <div class="lcontact">
       <p><strong>Accès privé — Contactez MassambaTech</strong></p>
       <p>📞 221 78 123 87 66 &nbsp;|&nbsp; 📧 massd432@gmail.com</p>
-      <button class="btnwa" onclick="window.open('https://wa.me/221781238766','_blank')">💬 Contacter sur WhatsApp</button>
+      <button class="btnwa2" onclick="window.open('https://wa.me/221781238766','_blank')">💬 Contacter sur WhatsApp</button>
     </div>
   </div>
 </div>
@@ -168,24 +166,29 @@ canvas{border:1px dashed #bbb;background:#fff;width:100%;height:100px;display:bl
 <div class="swrap">
 <div id="devis">
 
+  <!-- EN-TÊTE -->
   <div class="entete">
     <div class="lbloc">
       <input type="file" class="no-print" accept="image/*" onchange="chgLogo(event)">
-      <img id="logoimg" src="logo.png" alt="Logo" onerror="this.style.display='none';document.querySelector('.ltxt').style.display='block'">
+      <img id="logoimg" src="logo.png" alt="Logo"
+           onerror="this.style.display='none';document.querySelector('.ltxt').style.display='block'">
       <div class="ltxt">TECHNALU</div>
     </div>
     <div class="dlieu" contenteditable="true" id="dlieu">Dakar le ...</div>
   </div>
 
+  <!-- TITRE -->
   <div class="toffre">
     <span class="ttexte" contenteditable="true">OFFRE DE PRIX</span>
   </div>
 
+  <!-- CLIENT -->
   <div class="cligng">
     <span class="clabel">Client :</span>
     <span class="cval" contenteditable="true">Nom du client</span>
   </div>
 
+  <!-- TABLEAU -->
   <div class="twrap">
     <table class="mt">
       <thead>
@@ -212,30 +215,27 @@ canvas{border:1px dashed #bbb;background:#fff;width:100%;height:100px;display:bl
   </div>
   <button class="addbtn no-print" onclick="addRow()">+ Ajouter une ligne</button>
 
+  <!-- MONTANT EN LETTRES -->
   <div class="mlettres">
     Cette présente est arrêtée à la somme de :
     <span class="mlval" id="mlzone">Zéro franc CFA</span>
   </div>
 
+  <!-- SIGNATURE : image tampon+signature uniquement -->
   <div class="sigarea">
-    <div class="sigbox">
-      <span class="sigtitre" contenteditable="true">Directeur Général</span>
-      <span class="signom" contenteditable="true">Mamadou Coundoul</span>
-      <div class="cwrap">
-        <canvas id="sigcv"></canvas>
-        <img id="stamp" src="tampons.png" alt="Tampon" onerror="this.style.display='none'">
-      </div>
-      <div class="sctrl no-print">
-        <input type="file" accept="image/*" onchange="chgStamp(event)">
-        <button class="clrbtn" onclick="clearSig()">Effacer</button>
-      </div>
-    </div>
-    <div class="sigbox">
-      <span class="sigtitre" contenteditable="true">Signature Client</span>
-      <div class="sigclient">Signer ici</div>
+    <span class="sigtitre" contenteditable="true">Directeur Général</span>
+    <span class="signom" contenteditable="true">Mamadou Coundoul</span>
+    <!-- Image tampon/signature déjà signée chargée depuis tampon.png -->
+    <img id="stamp" class="stamp-img" src="tamponss.png" alt="Signature & Tampon"
+         onerror="this.style.display='none'">
+    <!-- Bouton pour changer l'image (invisible à l'impression) -->
+    <div class="stamp-ctrl no-print">
+      Changer signature/tampon :
+      <input type="file" accept="image/*" onchange="chgStamp(event)" style="font-size:11px">
     </div>
   </div>
 
+  <!-- PIED DE PAGE -->
   <hr class="psep">
   <div class="ppage" contenteditable="true">WORK SHOP : KM 4,5 boulevard du centenaire de la commune de Dakar &nbsp;&nbsp; RC : SN.DKR. 2019 A.A.11568<br>NINEA : 005304051 &nbsp;&nbsp; TELEPHONE : +221 77 872 44 46 / +221 33 929 24 25 &nbsp;&nbsp; contact.technalu@gmail.com</div>
 
@@ -254,7 +254,7 @@ var EML = "client221@gmail.com";
 var PWD = "clients2000@";
 var KEY = "techna_rem";
 
-/* Chargement auto identifiants */
+/* Charger identifiants sauvegardés */
 window.onload = function() {
   try {
     var s = localStorage.getItem(KEY);
@@ -264,20 +264,20 @@ window.onload = function() {
       document.getElementById("fpass").value  = d.p || "";
       document.getElementById("frem").checked = true;
     }
-  } catch(e){}
+  } catch(e) {}
   document.getElementById("femail").onkeydown = function(e){ if(e.key==="Enter") doLogin(); };
   document.getElementById("fpass").onkeydown  = function(e){ if(e.key==="Enter") doLogin(); };
 };
 
-/* Oeil */
+/* Oeil mot de passe */
 function togglePwd() {
-  var i = document.getElementById("fpass");
+  var inp = document.getElementById("fpass");
   var ico = document.getElementById("eyeico");
-  if (i.type === "password") {
-    i.type = "text";
+  if (inp.type === "password") {
+    inp.type = "text";
     ico.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
   } else {
-    i.type = "password";
+    inp.type = "password";
     ico.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
   }
 }
@@ -300,17 +300,16 @@ function doLogin() {
   }
 }
 
-/* Init app */
+/* Initialisation après connexion */
 function initApp() {
   var mo = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
   var n  = new Date();
   document.getElementById("dlieu").innerText = "Dakar le " + n.getDate() + " " + mo[n.getMonth()] + " " + n.getFullYear();
-  initSig();
   addRow();
   setTimeout(scaleDevis, 60);
 }
 
-/* Scale affichage */
+/* Scale responsive */
 function scaleDevis() {
   var d = document.getElementById("devis");
   var w = document.querySelector(".swrap");
@@ -322,7 +321,7 @@ function scaleDevis() {
 }
 window.addEventListener("resize", scaleDevis);
 
-/* Lignes */
+/* Ajouter ligne */
 function addRow() {
   var n  = document.querySelectorAll("#tbody tr").length + 1;
   var tr = document.createElement("tr");
@@ -334,27 +333,34 @@ function addRow() {
     '<td contenteditable="true" class="qty">1</td>' +
     '<td contenteditable="true" class="prix">0</td>' +
     '<td class="tot">0</td>' +
-    '<td class="no-print" style="border:none;padding:3px"><button class="delbtn" onclick="delRow(this)">&#10005;</button></td>';
+    '<td class="no-print" style="border:none;padding:3px">' +
+      '<button class="delbtn" onclick="delRow(this)">&#10005;</button>' +
+    '</td>';
   document.getElementById("tbody").appendChild(tr);
   calc();
 }
+
 function delRow(btn) {
   btn.closest("tr").remove();
-  document.querySelectorAll("#tbody tr").forEach(function(r,i){ var e=r.querySelector(".refn"); if(e) e.innerText=i+1; });
+  document.querySelectorAll("#tbody tr").forEach(function(r,i){
+    var e = r.querySelector(".refn"); if(e) e.innerText = i + 1;
+  });
   calc();
 }
+
 document.addEventListener("input", function(e){
   if (e.target.classList.contains("qty") || e.target.classList.contains("prix")) calc();
 });
 
-/* Calcul */
+/* Calcul total */
 function calc() {
   var tot = 0;
   document.querySelectorAll("#tbody tr").forEach(function(row) {
     var q = parseFloat(((row.querySelector(".qty")||{}).innerText||"0").replace(/[\s\u00a0]/g,"").replace(",",".")) || 0;
     var p = parseFloat(((row.querySelector(".prix")||{}).innerText||"0").replace(/[\s\u00a0]/g,"").replace(",",".")) || 0;
     var t = q * p;
-    var el = row.querySelector(".tot"); if(el) el.innerText = t.toLocaleString("fr-FR");
+    var el = row.querySelector(".tot");
+    if (el) el.innerText = t.toLocaleString("fr-FR");
     tot += t;
   });
   document.getElementById("totdisp").innerText = tot.toLocaleString("fr-FR");
@@ -365,120 +371,97 @@ function calc() {
 function enLettres(n) {
   n = Math.round(n);
   if (n === 0) return "Zéro franc CFA";
-  var u=["","un","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit","dix-neuf"];
-  function dz(x){
-    if(x<20)return u[x];
-    var d=Math.floor(x/10),r=x%10;
-    if(d===7)return "soixante-"+u[10+r];
-    if(d===8)return r===0?"quatre-vingts":"quatre-vingt-"+u[r];
-    if(d===9)return "quatre-vingt-"+u[10+r];
+  var u = ["","un","deux","trois","quatre","cinq","six","sept","huit","neuf",
+           "dix","onze","douze","treize","quatorze","quinze","seize",
+           "dix-sept","dix-huit","dix-neuf"];
+  function dz(x) {
+    if (x < 20) return u[x];
+    var d=Math.floor(x/10), r=x%10;
+    if (d===7) return "soixante-"+u[10+r];
+    if (d===8) return r===0?"quatre-vingts":"quatre-vingt-"+u[r];
+    if (d===9) return "quatre-vingt-"+u[10+r];
     var b=["","","vingt","trente","quarante","cinquante","soixante"][d];
-    return r===0?b:r===1?b+" et un":b+"-"+u[r];
+    return r===0?b : r===1?b+" et un" : b+"-"+u[r];
   }
-  function ct(x){
-    if(x<100)return dz(x);
-    var c=Math.floor(x/100),r=x%100;
-    if(c===1)return r===0?"cent":"cent "+dz(r);
+  function ct(x) {
+    if (x<100) return dz(x);
+    var c=Math.floor(x/100), r=x%100;
+    if (c===1) return r===0?"cent":"cent "+dz(r);
     return u[c]+" cent"+(r===0?"s":" "+dz(r));
   }
-  function ml(x){
-    if(x<1000)return ct(x);
-    var m=Math.floor(x/1000),r=x%1000;
-    return(m===1?"mille":ct(m)+" mille")+(r===0?"":" "+ct(r));
+  function ml(x) {
+    if (x<1000) return ct(x);
+    var m=Math.floor(x/1000), r=x%1000;
+    return (m===1?"mille":ct(m)+" mille")+(r===0?"":" "+ct(r));
   }
-  function mi(x){
-    if(x<1e6)return ml(x);
-    var m=Math.floor(x/1e6),r=x%1e6;
+  function mi(x) {
+    if (x<1e6) return ml(x);
+    var m=Math.floor(x/1e6), r=x%1e6;
     return ct(m)+(m>1?" millions":" million")+(r===0?"":" "+ml(r));
   }
-  function mia(x){
-    if(x<1e9)return mi(x);
-    var m=Math.floor(x/1e9),r=x%1e9;
+  function mia(x) {
+    if (x<1e9) return mi(x);
+    var m=Math.floor(x/1e9), r=x%1e9;
     return ct(m)+(m>1?" milliards":" milliard")+(r===0?"":" "+mi(r));
   }
-  var t=mia(n);
-  return t.charAt(0).toUpperCase()+t.slice(1)+" franc CFA";
+  var t = mia(n);
+  return t.charAt(0).toUpperCase() + t.slice(1) + " franc CFA";
 }
 
-/* Logo & Tampon */
+/* Changer logo */
 function chgLogo(e) {
-  var f=e.target.files[0]; if(!f) return;
-  var img=document.getElementById("logoimg");
-  img.src=URL.createObjectURL(f); img.style.display="block";
-  document.querySelector(".ltxt").style.display="none";
+  var f = e.target.files[0]; if (!f) return;
+  var img = document.getElementById("logoimg");
+  img.src = URL.createObjectURL(f);
+  img.style.display = "block";
+  document.querySelector(".ltxt").style.display = "none";
 }
+
+/* Changer image tampon/signature */
 function chgStamp(e) {
-  var f=e.target.files[0]; if(!f) return;
-  var img=document.getElementById("stamp");
-  img.src=URL.createObjectURL(f); img.style.display="block";
+  var f = e.target.files[0]; if (!f) return;
+  var img = document.getElementById("stamp");
+  img.src = URL.createObjectURL(f);
+  img.style.display = "block";
 }
 
-/* Canvas signature */
-function initSig() {
-  var cv=document.getElementById("sigcv"), ctx=cv.getContext("2d"), drw=false;
-  function gp(e){ var r=cv.getBoundingClientRect(),sx=cv.width/r.width,sy=cv.height/r.height,s=e.touches?e.touches[0]:e; return{x:(s.clientX-r.left)*sx,y:(s.clientY-r.top)*sy}; }
-  cv.addEventListener("mousedown",  function(e){drw=true;var p=gp(e);ctx.beginPath();ctx.moveTo(p.x,p.y)});
-  cv.addEventListener("mousemove",  function(e){if(!drw)return;var p=gp(e);ctx.lineWidth=2;ctx.lineCap="round";ctx.strokeStyle="#000";ctx.lineTo(p.x,p.y);ctx.stroke();ctx.beginPath();ctx.moveTo(p.x,p.y)});
-  cv.addEventListener("mouseup",    function(){drw=false;ctx.beginPath()});
-  cv.addEventListener("mouseleave", function(){drw=false;ctx.beginPath()});
-  cv.addEventListener("touchstart", function(e){e.preventDefault();drw=true;var p=gp(e);ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:false});
-  cv.addEventListener("touchmove",  function(e){e.preventDefault();if(!drw)return;var p=gp(e);ctx.lineWidth=2;ctx.lineCap="round";ctx.strokeStyle="#000";ctx.lineTo(p.x,p.y);ctx.stroke();ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:false});
-  cv.addEventListener("touchend",   function(){drw=false;ctx.beginPath()});
-}
-function clearSig(){ var c=document.getElementById("sigcv"); c.getContext("2d").clearRect(0,0,c.width,c.height); }
-
-/* ══ GÉNÉRATION PDF — TOUJOURS UNE SEULE PAGE A4 ══ */
+/* Génération PDF — toujours une seule page A4 */
 async function genPDF() {
   var dv  = document.getElementById("devis");
   var nps = document.querySelectorAll(".no-print");
 
-  /* Annuler le scale, fixer à 820px, masquer boutons */
-  var sT = dv.style.transform, sM = dv.style.marginBottom;
+  var sT = dv.style.transform;
+  var sM = dv.style.marginBottom;
   dv.style.transform    = "none";
   dv.style.marginBottom = "0";
   dv.style.width        = "820px";
   nps.forEach(function(el){ el.style.display = "none"; });
 
-  /* Attendre le repaint */
   await new Promise(function(r){ setTimeout(r, 200); });
 
-  /* Capturer à haute résolution */
   var canvas = await html2canvas(dv, {
-    scale:           2,
-    useCORS:         true,
-    allowTaint:      true,
-    backgroundColor: "#ffffff",
-    logging:         false,
-    windowWidth:     820,
-    width:           820
+    scale: 2, useCORS: true, allowTaint: true,
+    backgroundColor: "#ffffff", logging: false,
+    windowWidth: 820, width: 820
   });
 
-  /* Restaurer */
   nps.forEach(function(el){ el.style.display = ""; });
   dv.style.transform    = sT;
   dv.style.marginBottom = sM;
   dv.style.width        = "";
 
-  /* Créer PDF A4 — forcer à tenir sur UNE seule page */
-  var W = 210; /* largeur A4 en mm */
-  var H = 297; /* hauteur A4 en mm */
-
-  /* Hauteur de l'image convertie en mm (si affichée sur largeur A4) */
+  var W = 210, H = 297;
   var imgH_mm = (canvas.height * W) / canvas.width;
-
-  var pdf = new window.jspdf.jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+  var pdf = new window.jspdf.jsPDF({ orientation:"portrait", unit:"mm", format:"a4" });
 
   if (imgH_mm <= H) {
-    /* Tient normalement */
     pdf.addImage(canvas.toDataURL("image/jpeg", 0.95), "JPEG", 0, 0, W, imgH_mm);
   } else {
-    /* Trop grand : on réduit proportionnellement pour tenir sur 1 page */
     var ratio = H / imgH_mm;
     var fw = W * ratio;
-    var ox = (W - fw) / 2; /* centrer */
+    var ox = (W - fw) / 2;
     pdf.addImage(canvas.toDataURL("image/jpeg", 0.95), "JPEG", ox, 0, fw, H);
   }
-
   return pdf;
 }
 
@@ -497,18 +480,17 @@ async function doPDF(share) {
 
     if (share) {
       var file = new File([blob], "devis.pdf", {type:"application/pdf"});
-      /* Mobile natif */
       if (navigator.canShare && navigator.canShare({files:[file]})) {
         await navigator.share({title:titre, text:txt, files:[file]});
         return;
       }
-      /* Desktop : télécharger + ouvrir WhatsApp */
       var u = URL.createObjectURL(blob);
       var a = document.createElement("a"); a.href=u; a.download="devis.pdf"; a.click();
       URL.revokeObjectURL(u);
-      setTimeout(function(){ window.open("https://wa.me/?text="+encodeURIComponent(txt+" (PDF joint)"),"_blank"); }, 800);
+      setTimeout(function(){
+        window.open("https://wa.me/?text=" + encodeURIComponent(txt + " (PDF joint)"), "_blank");
+      }, 800);
     } else {
-      /* Téléchargement simple */
       var u = URL.createObjectURL(blob);
       var a = document.createElement("a"); a.href=u; a.download="devis.pdf"; a.click();
       URL.revokeObjectURL(u);
